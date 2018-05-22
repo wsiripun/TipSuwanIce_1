@@ -54,6 +54,7 @@
 		</web-resource-collection>
   		<auth-constraint>
 			<role-name>dude</role-name>
+			<role-name>manager</role-name>		
 		</auth-constraint>
 
 		<user-data-constraint>

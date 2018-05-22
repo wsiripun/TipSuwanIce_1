@@ -27,10 +27,9 @@ public class EmployeeDAO {
             ResultSet rs = statement.executeQuery("select * from Employees");
             while (rs.next()) {
             	Employee employee = new Employee();
-            	employee.setEmployeeID(rs.getInt("employeeID"));
+            	employee.setLoginID(rs.getString("loginID"));
             	employee.setActive(rs.getBoolean("active"));
             	employee.setPassword(rs.getString("password"));
-            	employee.setUserRole(rs.getString("userRole"));
             	employee.setFirstName(rs.getString("firstName"));
             	employee.setLastName(rs.getString("lastName"));
             	
@@ -48,49 +47,41 @@ public class EmployeeDAO {
     }
 	
 	// 'synchronized' for mutual exclusion between multiple creations.
-	//
-	//  employeeID must be 0 or positive integer. If not, it causes exception.
-	//  employeeID=0 means creating new employee.
-	//  employeeID=1+ means creating new employee if the ID does not exist.  If exist, perform update.
-	public synchronized int  createOrUpdateEmployee(Employee employee) {     
-		int newEmployeeID = -1;
+	public synchronized boolean  createOrUpdateEmployee(Employee employee) {     
+		boolean returnResult = false;
         try {
 
         	connection = DbUtil.getConnection();
 			
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"insert into Employees(employeeID, active, password, userRole, firstName, lastName, email, phoneNumber) " +
-					"values (?, ?, ?, ?, ?, ?, ?, ?) " +
+					"insert into Employees(loginID, password,  active, firstName, lastName, email, phoneNumber) " +
+					"values (?, ?, ?, ?, ?, ?, ?) " +
 					"on duplicate key update " +
-					"employeeID = values(employeeID), " +
-					"active = values(active), " +
+					"loginID = values(loginID), " +
 					"password = values(password), " +
-					"userRole = values(userRole), " +		
+					"active = values(active), " +						
 		    		"firstName = values(firstName), " +
 		    		"lastName = values(lastName), " +
 		    		"email = values(email), " +
 					"phoneNumber = values(phoneNumber)", Statement.RETURN_GENERATED_KEYS);
 			
 			// Parameters start with 1
-			preparedStatement.setInt(1, employee.getEmployeeID());
-			preparedStatement.setBoolean(2, employee.isActive());
-			preparedStatement.setString(3, employee.getPassword());
-			preparedStatement.setString(4, employee.getUserRole());
-			preparedStatement.setString(5, employee.getFirstName());
-			preparedStatement.setString(6, employee.getLastName());
-			preparedStatement.setString(7, employee.getEmail());
-			preparedStatement.setString(8, employee.getPhoneNumber());
+			preparedStatement.setString(1, employee.getLoginID());
+			preparedStatement.setString(2, employee.getPassword());
+			preparedStatement.setBoolean(3, employee.isActive());
+			preparedStatement.setString(4, employee.getFirstName());
+			preparedStatement.setString(5, employee.getLastName());
+			preparedStatement.setString(6, employee.getEmail());
+			preparedStatement.setString(7, employee.getPhoneNumber());
 
 			
-
-			preparedStatement.executeUpdate();			
-			
-			// Retrieve the row number which is used as orderID
-            ResultSet rs1 = preparedStatement.getGeneratedKeys();
-            if(rs1.next())
+			// rowCount = 1 for success insert.  rowCount = 2 for success update
+			int rowCount = preparedStatement.executeUpdate();
+			System.out.println("createOrUpdateEmployee():  rowCount=" + rowCount);
+            if(rowCount == 1 || rowCount == 2)
             {
-                newEmployeeID = rs1.getInt(1);
-                // System.out.println("createOrUpdateEmployee():  newEmployeeID=" + newEmployeeID);
+            	returnResult = true;
+      
             }
             
             
@@ -102,7 +93,7 @@ public class EmployeeDAO {
 
         }
         
-        return newEmployeeID;
+        return returnResult;
         
 	} 
 

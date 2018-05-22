@@ -3,28 +3,19 @@ package com.erp.tipsuwan.db.model;
 public class Employee {
 	private static final long serialVersionUID = 1L;
 	
-	private int      employeeID;
-	private boolean	active = true;
+	private String loginID = null;
 	private String password =  null;
-	private String userRole =  null;
+	private boolean	active = true;
 	private String firstName =  null;
 	private String lastName =  null;
 	private String email =  null;
 	private String phoneNumber =  null;
 	
-	
-	
-	public int getEmployeeID() {
-		return employeeID;
+	public String getLoginID() {
+		return loginID;
 	}
-	public void setEmployeeID(int employeeID) {
-		this.employeeID = employeeID;
-	}
-	public boolean isActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setLoginID(String loginID) {
+		this.loginID = loginID;
 	}
 	public String getPassword() {
 		return password;
@@ -32,11 +23,11 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getUserRole() {
-		return userRole;
+	public boolean isActive() {
+		return active;
 	}
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -67,12 +58,9 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [employeeID=" + employeeID + ", active=" + active + ", password=" + password + ", userRole="
-				+ userRole + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + "]";
+		return "Employee [loginID=" + loginID + ", password=" + password + ", active=" + active + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
-	
-
 	
 
 }

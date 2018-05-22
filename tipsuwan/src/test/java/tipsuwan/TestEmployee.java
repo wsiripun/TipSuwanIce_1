@@ -10,6 +10,9 @@ public class TestEmployee {
     	TestEmployee testEmployee = new TestEmployee();
     	testEmployee.getAllEmployees();
     	testEmployee.createOrUpdateEmployee();
+    	
+    	System.out.println("\n=========   AFTER CREATE OR UPDATE======\n\n");
+    	testEmployee.getAllEmployees();
 
     }
     
@@ -29,19 +32,18 @@ public class TestEmployee {
     	EmployeeDAO employeeDAO = new EmployeeDAO();
     	Employee emp = new Employee();
     	
-    	System.out.println("TESTING: TestEmployee.createOrUpdateEmployee()    EmpID=" + emp.getEmployeeID());
+    	System.out.println("TESTING: TestEmployee.createOrUpdateEmployee()    loginID=" + emp.getLoginID());
     	
 
-    	emp.setEmployeeID(0);		// 0 = creating new employee.  1+ = create if not exist. If exist, update
+    	emp.setLoginID("newEmpID_4");		// 0 = creating new employee.  1+ = create if not exist. If exist, update
+    	emp.setPassword("newEmpID_3_pass");    	
     	emp.setActive(true);
-    	emp.setPassword("empNEW_pw");
-    	emp.setUserRole("Driver");
-    	emp.setFirstName("emp_T4_firstname");
-    	emp.setLastName("empLastName");
+    	emp.setFirstName("newEmpID_3_FN");
+    	emp.setLastName("newEmpID_3_LN");
     			
-    	int i  = employeeDAO.createOrUpdateEmployee(emp);
+    	boolean result  = employeeDAO.createOrUpdateEmployee(emp);
     	System.out.println ("\n\n==========");
-    	System.out.println(" NEW EMP ID =" + i);
+    	System.out.println(" createOrUpdateResult =" + result);
     }
 
 }
