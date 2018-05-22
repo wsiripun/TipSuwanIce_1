@@ -142,8 +142,8 @@
              driverName="com.mysql.jdbc.Driver"
           connectionURL="jdbc:mysql://localhost:3306/db_tipsuwan"
          connectionName="dbuser" connectionPassword="dbpassword"
-              userTable="tomcat_users" userNameCol="user_name" userCredCol="password"
-          userRoleTable="tomcat_users_roles" roleNameCol="role_name" />	
+              userTable="Employees" userNameCol="loginID" userCredCol="password"
+          userRoleTable="Employees_Roles" roleNameCol="role_name" />	
 	<!-- WS End 1: add JDBC Realm below -->	
       </Realm>
 
