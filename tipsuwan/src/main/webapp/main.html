@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TipSuwan Main</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script 
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+
+</head>
+<body>
+
+	<h3>TIPSUWAN MAIN PAGE</h3>
+	<p>
+		$(document).ready(function() {.. } has retrieved <b>USER ID</b> and <b>USER
+			ROLE</b> and store in: <br> userName and userRole.
+	</p>
+	<p>
+		To retrieve the values do: <br> 
+		var userName = localStorage.getItem('userName'); <br> 
+		var userRole =  localStorage.getItem('userRole');
+	</p>
+
+	
+
+	
+<script>
+	$(document).ready(function() {
+ 		alert ("IN READY FN 222");
+ 		
+ 		$.post("/tipsuwan/loginmgr/getIDandRole",
+        function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+         }); 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 	})
+</script>
+
+
+</body>
+</html>

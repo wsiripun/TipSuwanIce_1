@@ -14,6 +14,7 @@ public class HelloWorldApplication extends Application
     public HelloWorldApplication() {
         // ADD YOUR RESTFUL RESOURCES HERE
         this.singletons.add(new HelloWorld());
+        this.singletons.add(new LoginServlet());
         //this.singletons.add(new SetTableID());
         //this.singletons.add(new Restaurant());
     }

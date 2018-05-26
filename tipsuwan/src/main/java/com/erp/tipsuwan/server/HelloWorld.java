@@ -22,7 +22,7 @@ public class HelloWorld
     @GET
     @Path("helloname/{name}")
     public String hello(@PathParam("name") final String name) {
-      return "Hello from GH_MV" +name;
+      return "Hello from: " +name;
     }
     
     // URI:   http://localhost:591/tipsuwan/tutorial/item
