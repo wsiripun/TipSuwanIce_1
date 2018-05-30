@@ -26,17 +26,52 @@
 		var userName = localStorage.getItem('userName'); <br> 
 		var userRole =  localStorage.getItem('userRole');
 	</p>
+	<br>
+	<br>
+	<h3>Hit Button Below To Log Out</h3>
+	<p>
+		<input type="button" value="LOGOUT" onclick="logoutfn()" /> 
+	</p>
 
 	
 
 	
 <script>
+
+    function logoutfn() {
+    	
+ 		$.get("/tipsuwan/loginmgr/logout",
+ 		        function(data,status){
+ 		            if (status === "success") {
+						alert ("logout sueecess");
+		            	localStorage.setItem('userName', "");
+		            	localStorage.setItem('userRole', "");
+ 		            } else {
+ 		            	//alert ("logout FAILED status=" + status); 
+ 		            }
+ 		         });
+    	
+    }
+    
+    
 	$(document).ready(function() {
- 		alert ("IN READY FN 222");
- 		
- 		$.post("/tipsuwan/loginmgr/getIDandRole",
+		
+ 		// Do  http://localhost:591/tipsuwan/loginmgr/login to redirect the code here (main.html)
+ 		// Get 
+ 		$.get("/tipsuwan/loginmgr/getIDandRole",
         function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
+            if (status === "success") {
+            	var words = data.split(":");
+            	localStorage.setItem('userName', words[0]);
+            	localStorage.setItem('userRole', words[1]);
+            } else {
+            	alert ("Retriving id and role failed");
+            }
+            
+            
+            var userName = localStorage.getItem('userName');
+            var userRole =  localStorage.getItem('userRole');
+            alert("userName: " + userName + "\nuserRole: " + userRole);
          }); 		
  		
  		

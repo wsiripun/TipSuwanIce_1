@@ -38,15 +38,30 @@ public class LoginServlet {
 //		        function(data,status){
 //		            alert("Data: " + data + "\nStatus: " + status);
 //		         });  
-    @POST
+    @GET
     @Path("getIDandRole")
     public String getIDandRole( @Context HttpServletRequest request, @Context HttpServletResponse response) 
 			throws ServletException, IOException {
+    	// Get userName from the login session.
+    	String userName = request.getRemoteUser();		// e.g., userName=sale1
+    	System.out.println("USER NAME=" + userName);
     	
+    	// TODO: Use 'userName' to retrieve the roles from DB.  	<===   TODO
+    	// Return hard code for now.
     	return "sale1:Sale";
     	
     }
     
+    
+    @GET
+    @Path("logout")
+    public String logout( @Context HttpServletRequest request, @Context HttpServletResponse response) 
+			throws ServletException, IOException {
+    	
+    	request.getSession().invalidate();		// user needs to login again after invalidate
+    	return "logoutSuccess";
+    	
+    }
     
 
 }
