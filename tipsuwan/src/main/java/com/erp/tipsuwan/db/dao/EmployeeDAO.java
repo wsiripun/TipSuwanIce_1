@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.erp.tipsuwan.db.common.DbUtil;
+import com.erp.tipsuwan.db.common.Version;
 import com.erp.tipsuwan.db.model.Employee;
 
 import java.util.logging.Level;
@@ -96,5 +97,35 @@ public class EmployeeDAO {
         return returnResult;
         
 	} 
+	
+	public List<Employee> getEmployeeWithLoginID(String empLoginID) {
+		List<Employee> employeeList =  new ArrayList<Employee>();
+		try {
+        	connection = DbUtil.getConnection();      	
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"select loginID, firstName, lastName, email, phoneNumber from Employees" +
+					" WHERE loginID = ?"
+			);
+			preparedStatement.setString(1, empLoginID);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			// orderID is key. There is only one record
+			while (rs.next()) {
+				Employee employee = new Employee();
+				employee.setLoginID(rs.getString("loginID"));
+				employee.setFirstName(rs.getString("firstName"));
+				employee.setLastName(rs.getString("lastName"));
+				employee.setEmail(rs.getString("email"));
+				employee.setPhoneNumber(rs.getString("phoneNumber"));
+				System.out.println(employee.getFirstName());
+				employeeList.add(employee);
+			}  
+		} catch (SQLException ex) {
+        	System.out.println("getOrdersInRange():  ERROR SQLException  error_message=" + ex.getMessage());
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+		}		
+		return employeeList;
+	}	
 
 }
