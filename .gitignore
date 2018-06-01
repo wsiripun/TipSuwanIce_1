@@ -1,1 +1,12 @@
 /.metadata/
+*.tis
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_0.prx
+*.tii
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_0.frq
+*.nrm
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_0.fnm
+*.fdt
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/write.lock
+*.gen
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_1
+*.fdx
