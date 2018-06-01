@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>TipSuwan Main</title>
+<title>Tipsuwan</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,38 +11,40 @@
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-
+	
+<meta charset="utf-8">
 </head>
 <body>
-
-	<h3>TIPSUWAN MAIN PAGE</h3>
-	<p>
-		$(document).ready(function() {.. } has retrieved <b>USER ID</b> and <b>USER
-			ROLE</b> and store in: <br> userName and userRole.
-	</p>
-	<p>
-		To retrieve the values do: <br> 
-		var userName = localStorage.getItem('userName'); <br> 
-		var userRole =  localStorage.getItem('userRole');
-	</p>
-	<br>
-	<br>
-	<h3>Hit Button Below To Log Out</h3>
-	<p>
-		<input type="button" value="LOGOUT" onclick="logoutfn()" /> 
-	</p>
-
-	<div id="createNewUser">
-		<h4>Create a new User:</h4>
-		<input type="submit" value="Create New User" onclick="window.location='/tipsuwan/newuser.html';" /> 
-	</div>
-
-	
+<div id=noAccess>
+	<h2>Sorry, you do not have access to view this page.</h2>
+</div>
+<div id=hasAccess>
+	<form>
+	<table>
+		<tr>
+			<td colspan="2">New User:</td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="firstname"></td>
+			<td><input type="text" name="lastname"></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type="password" name="j_password"/ ></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="button" value="Create New User" onclick="createNewUser()"/></td>
+		</tr>
+	</table>
+	</form>
+</div>
+<input type="submit" value="Back To Main" onclick="window.location='/tipsuwan/main.html';" />
 <script>
 
-    function logoutfn() {
+    function createNewUser() {
     	
- 		$.get("/tipsuwan/loginmgr/logout",
+ 		$.get("/tipsuwan/loginmgr/newUser",
  		        function(data,status){
  		            if (status === "success") {
 						alert ("logout sueecess");
@@ -77,17 +78,23 @@
             var userRole =  localStorage.getItem('userRole');
             //alert("userName: " + userName + "\nuserRole: " + userRole);
             
+            var accessGranted = document.getElementById("hasAccess");
+            var accessNotGranted = document.getElementById("noAccess");
+            
             // hide based on role
             if(userRole != 'SuperAdmin') {
-            	var newUserDiv = document.getElementById("createNewUser");
-            	newUserDiv.style.display = "none";
+            	accessNotGranted.style.display = "initial";
+            	accessGranted.style.display = "none";
+            } else {
+            	accessNotGranted.style.display = "none";
+            	accessGranted.style.display = "initial";
             }
             
          }); 		
  		
  	})
+    
 </script>
-
 
 </body>
 </html>

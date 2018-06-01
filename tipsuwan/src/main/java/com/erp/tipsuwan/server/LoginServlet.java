@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 
+import com.erp.tipsuwan.db.dao.EmployeeDAO;
+import com.erp.tipsuwan.db.model.Employee;
+
 
 @Path("loginmgr")
 public class LoginServlet {
@@ -45,11 +48,13 @@ public class LoginServlet {
     	// Get userName from the login session.
     	String userName = request.getRemoteUser();		// e.g., userName=sale1
     	System.out.println("USER NAME=" + userName);
-    	
+    	EmployeeDAO empDAO = new EmployeeDAO();
+    	Employee emp = empDAO.getEmployeeInfoWithLoginID(userName);
     	// TODO: Use 'userName' to retrieve the roles from DB.  	<===   TODO
     	// Return hard code for now.
-    	return "sale1:Sale";
     	
+    	return emp.getLoginID() + ":" + empDAO.getEmployeeRole(userName);
+    	//return "sale1:Sale";
     }
     
     
@@ -62,6 +67,29 @@ public class LoginServlet {
     	return "logoutSuccess";
     	
     }
+    
+    
+//	How to get ID and Role on client side    
+//  
+//		$.post("/tipsuwan/loginmgr/newUser",
+//		        function(data,status){
+//		            alert("Data: " + data + "\nStatus: " + status);
+//		         });  
+  @GET
+  @Path("newUser")
+  public void createNewUser(@FormParam("userID") String userID,
+		  					@FormParam("firstName") String firstName,
+		  					@FormParam("lastName") String lastName,
+		  					@FormParam("role")  String role,
+		  					@FormParam("email") String email,
+		  					@FormParam("phone") String phone) 
+	{
+  	// Get userName from the login session.
+  	
+  	
+  	
+  	
+	}
     
 
 }

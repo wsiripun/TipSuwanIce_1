@@ -59,7 +59,9 @@
 		</web-resource-collection>
   		<auth-constraint>
 			<role-name>Sale</role-name>
-			<role-name>Accounting</role-name>		
+			<role-name>Accounting</role-name>
+			<role-name>Admin</role-name>
+			<role-name>SuperAdmin</role-name>		
 		</auth-constraint>
 
 		<user-data-constraint>
