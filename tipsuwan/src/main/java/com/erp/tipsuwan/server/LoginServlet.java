@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
 import com.erp.tipsuwan.db.dao.EmployeeDAO;
 import com.erp.tipsuwan.db.model.Employee;
@@ -75,19 +76,38 @@ public class LoginServlet {
 //		        function(data,status){
 //		            alert("Data: " + data + "\nStatus: " + status);
 //		         });  
-  @GET
+  @POST
   @Path("newUser")
-  public void createNewUser(@FormParam("userID") String userID,
+  public String createNewUser(@FormParam("userID") String userID,
 		  					@FormParam("firstName") String firstName,
 		  					@FormParam("lastName") String lastName,
-		  					@FormParam("role")  String role,
 		  					@FormParam("email") String email,
-		  					@FormParam("phone") String phone) 
+		  					@FormParam("phone") String phone,
+		  					@FormParam("role")  String role) 
 	{
+	  String returnMessage = "";
+	  
   	// Get userName from the login session.
+	  Employee emp = new Employee();
+	  emp.setLoginID(userID);
+	  emp.setFirstName(firstName);
+	  emp.setLastName(lastName);
+	  emp.setEmail(email);
+	  emp.setPhoneNumber(phone);
+	  emp.setPassword("temporary");
+	  // return 
+	  
+	  System.out.println(emp.toString() + " role = " + role);
+	  
+	  
+  	  EmployeeDAO empDAO = new EmployeeDAO();
+  	  if(empDAO.createOrUpdateEmployee(emp) && empDAO.createOrUpdateEmployeeRole(emp, role)) {
+  		  returnMessage = "New User " + userID+ " has been successfully created!";
+  	  } else {
+  		  returnMessage = "ERROR: Unable to create user.";
+  	  }
   	
-  	
-  	
+  	  return returnMessage;
   	
 	}
     

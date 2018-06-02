@@ -25,13 +25,33 @@
 			<td colspan="2">New User:</td>
 		</tr>
 		<tr>
-			<td>Name:</td>
-			<td><input type="text" name="firstname"></td>
-			<td><input type="text" name="lastname"></td>
+			<td>Login ID:</td>
+			<td><input type="text" name="loginID" id="loginID"></td>
 		</tr>
 		<tr>
-			<td>Password:</td>
-			<td><input type="password" name="j_password"/ ></td>
+			<td>Name:</td>
+			<td><input type="text" name="firstname" id="firstName"></td>
+			<td><input type="text" name="lastname" id="lastName"></td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><input type="text" name="email" id="email"></td>
+		</tr>
+		<tr>
+			<td>Phone:</td>
+			<td><input type="text" name="phone" id="phone"></td>
+		</tr>
+		<tr>
+			<td>Role:</td>
+			<td>
+				<select name="role" id="roleChoice">
+				  <option value="Sale">Sales</option>
+				  <option value="Accounting">Accounting</option>
+				  <option value="Admin">Admin</option>
+				  <option value="SuperAdmin">Super Admin</option>
+				  <option value="Others">Remove Access</option>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="button" value="Create New User" onclick="createNewUser()"/></td>
@@ -43,19 +63,26 @@
 <script>
 
     function createNewUser() {
-    	
- 		$.get("/tipsuwan/loginmgr/newUser",
- 		        function(data,status){
- 		            if (status === "success") {
-						alert ("logout sueecess");
-		            	localStorage.setItem('userName', "");
-		            	localStorage.setItem('userRole', "");
-		            	window.location.href = "main.html";
- 		            } else {
- 		            	//alert ("logout FAILED status=" + status); 
- 		            }
- 		         });
-    	
+    	var loginID = document.getElementById("loginID").value;
+    	var fName = document.getElementById("firstName").value;
+    	var lName = document.getElementById("lastName").value;
+    	var emailAdd = document.getElementById("email").value;
+    	var phoneNum = document.getElementById("phone").value;
+    	var roles = document.getElementById("roleChoice").value;
+
+ 		$.post("/tipsuwan/loginmgr/newUser", {
+				userID: loginID,
+				firstName: fName,
+				lastName:  lName,
+				email: emailAdd,
+				phone:	phoneNum,			
+				role:	roles
+ 			},
+ 		    function(data,status)
+ 		    {
+ 				alert(data);
+ 		      }
+ 			);
     }
     
     

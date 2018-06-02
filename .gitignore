@@ -10,3 +10,8 @@
 *.gen
 .recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_1
 *.fdx
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_1.prx
+*.frq
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_1.fnm
+*.json
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_2
