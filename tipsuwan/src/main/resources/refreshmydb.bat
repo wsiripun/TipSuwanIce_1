@@ -5,7 +5,8 @@ USE db_tipsuwan;
 
 CREATE TABLE Employees (
     loginID  VARCHAR(20) NOT NULL PRIMARY KEY,   
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(150) NOT NULL,
+    salt VARCHAR(50) NOT NULL,
     active bit NOT NULL,			-- always set it to "Active" (=1) for now			
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
@@ -60,11 +61,11 @@ CREATE TABLE Employees_Roles (
 -- TBD: Invoice, Inventory, Customer Expense Table    
 
   
-insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('sale1', 'sale1pass', 1, 'Sale1FN', 'Sale1LN');
-insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('acct1', 'acct1pass', 1, 'Acct1FN', 'Acct1LN');
-insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('admin1', 'admin1pass', 1, 'Admin1FN', 'Admin1LN');
-insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('superadmin1', 'superadmin1pass', 1, 'SuperAdmin1FN', 'SuperAdmin1LN');
-insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('other1', 'other1pass', 1, 'Other1FN', 'Other1LN');
+insert into Employees (loginID, PASSWORD, SALT, ACTIVE, firstName, lastName) values ('sale1', 'sale1pass', 'sale1salt', 1, 'Sale1FN', 'Sale1LN');
+insert into Employees (loginID, PASSWORD, SALT, ACTIVE, firstName, lastName) values ('acct1', 'acct1pass', 'acct1salt', 1, 'Acct1FN', 'Acct1LN');
+insert into Employees (loginID, PASSWORD, SALT, ACTIVE, firstName, lastName) values ('admin1', 'admin1pass', 'admin1salt', 1, 'Admin1FN', 'Admin1LN');
+insert into Employees (loginID, PASSWORD, SALT, ACTIVE, firstName, lastName) values ('superadmin1', 'superadmin1pass', 'superadmin1salt', 1, 'SuperAdmin1FN', 'SuperAdmin1LN');
+insert into Employees (loginID, PASSWORD, SALT, ACTIVE, firstName, lastName) values ('other1', 'other1pass', 'other1salt', 1, 'Other1FN', 'Other1LN');
 -- insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('john', 'johnpass', 1, 'JohnFN', 'JohnLN');
 -- insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('jane', 'janepass', 1, 'JaneFN', 'JaneLN');
 

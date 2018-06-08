@@ -134,6 +134,44 @@ public class EmployeeDAO {
         
 	} 
 	
+	// 'synchronized' for mutual exclusion between multiple creations.
+		public synchronized boolean  createOrUpdateLoginInfo(Employee employee, String password, String salt) {     
+			boolean returnResult = false;
+	        try {
+
+	        	connection = DbUtil.getConnection();
+				
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"insert into Employees(loginID, password, salt) " +
+						"values (?, ?) " +
+						"on duplicate key update " +
+						"loginID = values(loginID), " +
+						"password = values(password) " +
+						"salt = values(salt), ", Statement.RETURN_GENERATED_KEYS);
+				
+				// Parameters start with 1
+				preparedStatement.setString(1, employee.getLoginID());
+				preparedStatement.setString(2, password);
+				preparedStatement.setString(3, salt);
+
+				
+				// rowCount = 1 for success insert.  rowCount = 2 for success update
+				int rowCount = preparedStatement.executeUpdate();
+				System.out.println("createOrUpdateLoginInfo():  rowCount=" + rowCount);
+	            if(rowCount == 1 || rowCount == 2)
+	            {
+	            	returnResult = true;
+	      
+	            }
+	            
+	        }catch (SQLException ex) {
+	            Logger lgr = Logger.getLogger(EmployeeDAO.class.getName());
+	            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	        }
+	        return returnResult;
+	        
+		} 
+	
 	public Employee getEmployeeInfoWithLoginID(String empLoginID) {
 		Employee employee =  new Employee();
 		try {

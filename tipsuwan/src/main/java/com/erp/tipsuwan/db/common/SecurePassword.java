@@ -52,7 +52,7 @@ public class SecurePassword {
 	{
 		int iterations = 1000;
 		char[] chars = password.toCharArray();
-		byte[] salt = getSalt().getBytes();
+		byte[] salt = getSalt();
 		
 		System.out.println(salt);
 		
@@ -78,12 +78,16 @@ public class SecurePassword {
 		    return sb.toString();
 		  }
 	
-	private static String getSalt() throws NoSuchAlgorithmException
+	private static byte[] getSalt() throws NoSuchAlgorithmException
 	{
 		
 		byte[] salt = new byte[16];
 		new SecureRandom().nextBytes(salt);
-		return salt.toString();
+		for(int i = 0; i<16; i++) {
+            System.out.print(salt[i] & 0x00FF);
+            System.out.print(" ");
+        }
+		return salt;
 	}
 	
 	private static String toHex(byte[] array) throws NoSuchAlgorithmException
