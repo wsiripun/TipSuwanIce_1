@@ -1,44 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>TipSuwan Main</title>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script 
-	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Tipsuwan Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="css/mainStyle.css" rel="stylesheet">
 </head>
 <body>
 
-	<h3>TIPSUWAN MAIN PAGE</h3>
-	<p>
-		$(document).ready(function() {.. } has retrieved <b>USER ID</b> and <b>USER
-			ROLE</b> and store in: <br> userName and userRole.
-	</p>
-	<p>
-		To retrieve the values do: <br> 
-		var userName = localStorage.getItem('userName'); <br> 
-		var userRole =  localStorage.getItem('userRole');
-	</p>
-	<br>
-	<br>
-	<h3>Hit Button Below To Log Out</h3>
-	<p>
-		<input type="button" value="LOGOUT" onclick="logoutfn()" /> 
-	</p>
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#" style="color: black; font-size: 125%;"><b>ทิพย์สุวรรณไอซ์ - TIPSUWAN ICE</b></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav"  style="margin-left: 60px">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" >บิล - Invoices <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			  <li><a href="#">เปิดบิล - Create Invoice</a></li>
+			  <li><a href="#">แก้ไขบิล - Update Invoice</a></li>
+			  <li><a href="#">ลบบิล - Delete Invoice</a></li>
+			</ul>
+		  </li>
+		  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ลูกค้า - Customer <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+			  <li><a href="#" onclick="window.location='/tipsuwan/newuser.html';">เพิ่มลูกค้ารายใหม่ - Create Customer</a></li>
+			  <li><a href="#">แก้ไขรายการลูกค้า - Update Customer</a></li>
+			  <li><a href="#">ลบรายการลูกค้า - Delete Customer</a></li>
+			</ul>
+		  </li>
+		  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">รายงาน - Reporting <span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">รายงานการขาย - Sales Reporting</a></li>
+				<li><a href="#">รายงานลูกค้า - Customer Reporting</a></li>
+			</ul>
+		</li>
+		
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+			<li><a href="#" onclick="logoutfn()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	   </ul>
+    </div>
+  </div>
+</nav>
 
-	<div id="createNewUser">
-		<h4>Create a new User:</h4>
-		<input type="submit" value="Create New User" onclick="window.location='/tipsuwan/newuser.html';" /> 
-	</div>
+<!-- Welcome Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin" id="demo"></h3>
+</div>
 
-	
+<!-- Customer Container -->
+<div class="customerContainer">
+</div>
+
 <script>
 
     function logoutfn() {
@@ -59,6 +84,8 @@
     
     
 	$(document).ready(function() {
+	
+		
 		
  		// Do  http://localhost:591/tipsuwan/loginmgr/login to redirect the code here (main.html)
  		// Get 
@@ -76,18 +103,15 @@
             var userName = localStorage.getItem('userName');
             var userRole =  localStorage.getItem('userRole');
             //alert("userName: " + userName + "\nuserRole: " + userRole);
+            var d = new Date();
+			var string = d.toDateString() + "<br><br><br>Welcome " + userName + "!";
+			document.getElementById("demo").innerHTML = string;
             
-            // hide based on role
-            if(userRole != 'SuperAdmin') {
-            	var newUserDiv = document.getElementById("createNewUser");
-            	newUserDiv.style.display = "none";
-            }
             
          }); 		
  		
  	})
+
 </script>
-
-
 </body>
 </html>

@@ -13,6 +13,17 @@ CREATE TABLE Employees (
     phoneNumber VARCHAR(20)
     );
     
+CREATE TABLE Customers (
+    customerID  INT(20) NOT NULL PRIMARY KEY,   
+    active bit NOT NULL,			-- always set it to "Active" (=1) for now			
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    email VARCHAR(50),
+    phoneNumber VARCHAR(20),
+    outstandingMoneyBalance FLOAT(25, 2) NOT NULL,
+    outstandingBagBalance INT(20) NOT NULL
+    );
+    
 CREATE TABLE Roles (
     -- Valid roles are:
     --   1. "Sale"
@@ -57,6 +68,10 @@ insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('
 -- insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('john', 'johnpass', 1, 'JohnFN', 'JohnLN');
 -- insert into Employees (loginID, PASSWORD, ACTIVE, firstName, lastName) values ('jane', 'janepass', 1, 'JaneFN', 'JaneLN');
 
+
+insert into Customers (customerID, ACTIVE, firstName, lastName, outstandingMoneyBalance, outstandingBagBalance) values ('1', 1, 'Fran', 'Drescher', 0, 0);
+insert into Customers (customerID, ACTIVE, firstName, lastName, outstandingMoneyBalance, outstandingBagBalance) values ('2', 1, 'Jack', 'Ripper', 0, 0);
+insert into Customers (customerID, ACTIVE, firstName, lastName, outstandingMoneyBalance, outstandingBagBalance) values ('3', 1, 'Hurricane', 'Katrina', 0, 0);
 
 
 INSERT INTO Roles (role_name) VALUES ('Sale');
